@@ -1,8 +1,18 @@
 version: 0.2
+
 phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com
   build:
     commands:
-      - echo "Building the HTML project"
+      - echo Build the Docker image...
+      - docker build -t simple-html .
+      - docker tag simple-html:latest ${AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/simple-html:latest
+  post_build:
+    commands:
+      - echo Pushing the Docker image to ECR...
+      - docker push ${AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/simple-html:latest
 artifacts:
-  files:
-    - '**/*'
+  files: none
