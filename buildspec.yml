@@ -10,7 +10,7 @@ phases:
       - echo Build started on `date`
       - echo Building the Docker image...
       - docker build -t simple-html-app .
-      - docker tag simple-html-app:latest $AWS_ACCOUNT_ID.dkr.ecr.ap-southeast-1amazonaws.com/simple-html-app:latest
+      - docker tag simple-html-app:latest $AWS_ACCOUNT_ID.dkr.ecr.ap-southeast-1.amazonaws.com/simple-html-app:latest
   post_build:
     commands:
       - echo Pushing the Docker image...
