@@ -18,6 +18,8 @@ phases:
       - echo Build completed on `date`
       - echo Creating imagedefinitions.json file...
       - printf '[{"name":"simple-html-container","imageUri":"%s.dkr.ecr.ap-southeast-1.amazonaws.com/simple-html-ecr-481925865845:latest"}]' $AWS_ACCOUNT_ID > imagedefinitions.json
+      - echo "imagedefinitions.json contents:"  # Add this to log the file contents
+      - cat imagedefinitions.json  
 artifacts:
   files:
     - imagedefinitions.json
