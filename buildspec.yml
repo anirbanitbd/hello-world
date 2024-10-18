@@ -17,7 +17,7 @@ phases:
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/simple-html-ecr-481925865845:latest
       - echo Build completed on `date`
       - echo Creating imagedefinitions.json file...
-      - printf '[{"name":"simple-html-container","imageUri":"%s.dkr.ecr.us-east-2.amazonaws.com/simple-html-ecr-481925865845:latest"}]' $AWS_ACCOUNT_ID > imagedefinitions.json
+      - printf '[{"name":"simple-html-container","imageUri":"%s.dkr.ecr.us-east-2.amazonaws.com/simple-html-ecr-$AWS_ACCOUNT_ID:latest"}]' $AWS_ACCOUNT_ID > imagedefinitions.json
       - echo "imagedefinitions.json contents:"  # Add this to log the file contents
       - cat imagedefinitions.json
 artifacts:
