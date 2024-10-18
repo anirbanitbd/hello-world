@@ -1,23 +1,31 @@
 version: 0.2
 
+env:
+  variables:
+    AWS_REGION: us-east-2
+    AWS_ACCOUNT_ID: 741448917398
+    REPOSITORY_NAME: katikaa-repository
+    IMAGE_NAME: simple-html-ecr
+    DOCKER_CONTAINER_NAME: simple-html-container
+
 phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
-      - aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com
+      - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
   build:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
       - docker build -t simple-html-app .
-      - docker tag simple-html-app:latest $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/simple-html-ecr-$AWS_ACCOUNT_ID:latest
+      - docker tag $IMAGE_NAME:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$REPOSITORY_NAME-$AWS_ACCOUNT_ID:latest
   post_build:
     commands:
       - echo Pushing the Docker image...
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/simple-html-ecr-$AWS_ACCOUNT_ID:latest
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$REPOSITORY_NAME-$AWS_ACCOUNT_ID:latest
       - echo Build completed on `date`
       - echo Creating imagedefinitions.json file...
-      - printf '[{"name":"simple-html-container","imageUri":"%s.dkr.ecr.us-east-2.amazonaws.com/simple-html-ecr-$AWS_ACCOUNT_ID:latest"}]' $AWS_ACCOUNT_ID > imagedefinitions.json
+      - printf '[{"name":"simple-html-container","imageUri":"%s.dkr.ecr.$AWS_REGION.amazonaws.com/$REPOSITORY_NAME-$AWS_ACCOUNT_ID:latest"}]' $AWS_ACCOUNT_ID > imagedefinitions.json
       - echo "imagedefinitions.json contents:"  # Add this to log the file contents
       - cat imagedefinitions.json
 artifacts:
