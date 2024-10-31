@@ -1,0 +1,74 @@
+<div class="main-content community-list">
+  <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+  <div class="card">
+    <div class="card-body">
+      <div class="title">
+        Users
+      </div>
+      <div class="select-search mt-3">
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="search">
+              <img alt="" src="./assets/images/front/search.png">
+              <input placeholder="Search" type="text" class="search-input" (input)="search($event)"/>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tableresponsive table-responsive-xxl community-table border-0 pt-3 mb-4">
+        <table class="table table-striped p-0">
+          <thead>
+          <tr>
+            <th class="text-start width-20">User Name</th>
+            <th class="width-20">Email</th>
+            <th>USDC</th>
+            <th>ETH</th>
+            <th>FCFA</th>
+            <th>Winning</th>
+            <th>Bonus</th>
+            <th>Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of users; index as i">
+            <td class="text-start username width-20" data-title="User">{{ item?.user_name }}</td>
+            <td data-title="Email" class="width-20">{{ item?.email_id }}</td>
+            <td data-title="USDC">{{ item?.USDC }}</td>
+            <td data-title="ETH">{{ item?.ETH }}</td>
+            <td data-title="FCFA">{{ item?.FCFA | currency:'XAF':'' :'1.0-2'}}</td>
+            <td data-title="Winning">{{ item?.winning_amount | currency:'XAF':'' :'1.0-2'}}</td>
+            <td data-title="Bonus">{{ item?.bonus_amount | currency:'XAF':'' :'1.0-2'}}</td>
+            <td data-title="Actions">
+              <a class="btn btnsuccess" (click)="openBalanceAddModal(item)">Add Balance</a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row table-pagination">
+        <div class="col-sm-4">
+          <ng-select
+            [(ngModel)]="pageData.limit"
+            [clearable]="false"
+            [items]="pageSizeList"
+            [multiple]="false"
+            [searchable]="false"
+            (change)="limitChange()"
+          >
+          </ng-select>
+        </div>
+        <div class="col-sm-8">
+          <ngb-pagination
+            (pageChange)="pageChange($event)"
+            [(page)]="pageData.page"
+            [boundaryLinks]="true"
+            [collectionSize]="pageData.total"
+            [maxSize]="5"
+            [pageSize]="pageData.limit"
+            [rotate]="true"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,57 @@
+<nav class="navbar fixed-top" id="navbar">
+  <div class="navbar-top">
+    <div class="menu-bar">
+      <div (click)="toggleSidebar()" class="toggle-bar">
+        <img alt="" src="assets/images/front/menu-toggle.png">
+      </div>
+      <ul>
+        <li class="nav-item">
+          <div *ngIf="!authService.isLoggedIn" class="login-register-user" routerLink="/pages/login-register">
+                        <span class="img">
+                            <img alt="" src="assets/images/front/user-login-register.png">
+                        </span>
+            Login / Register
+          </div>
+          <div *ngIf="authService.isLoggedIn" class="dropdown d-inline-block user-details" ngbDropdown>
+            <button aria-expanded="false" aria-haspopup="true" class="btn header-item waves-effect"
+                    data-toggle="dropdown"
+                    id="page-header-user-dropdown" ngbDropdownToggle type="button">
+              <div class="profile-online-offline user">
+                <div class="profile-name-email">
+                  <span class="profile-name">{{authService.currentUserValue.user_name |titlecase}}</span>
+                </div>
+
+                <div class="img-online not-image">
+                  <img alt="Header Avatar" class="rounded-circle header-profile-user"
+                       src="assets/images/front/profile.png">
+                </div>
+              </div>
+            </button>
+            <div class="dropdown-menu" ngbDropdownMenu>
+              <ul>
+<!--                <li>-->
+<!--                  <a class="dropdown-item" routerLink="/profile" routerLinkActive="active"><span class="profile"><img-->
+<!--                    alt="" src="assets/images/front/profile-image.png"></span>My Profile</a>-->
+<!--                </li>-->
+                <li>
+                  <a class="dropdown-item" routerLink="/transaction" routerLinkActive="active"><span
+                    class="profile"><img alt="" src="assets/images/front/transactions.png"></span>Transactions</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" routerLink="/wallet" routerLinkActive="active"><span
+                    class="profile"><img alt="" src="assets/images/front/transactions.png"></span>Wallet</a>
+                </li>
+
+
+                <li>
+                  <a (click)="logOut()" class="dropdown-item" href="javascript: void(0);"><span class="logout"><img
+                    alt="" src="assets/images/front/logout.png"></span>Logout</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

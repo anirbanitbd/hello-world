@@ -1,0 +1,36 @@
+<router-outlet></router-outlet>
+<app-toasts aria-atomic="true" aria-live="polite"></app-toasts>
+<div *ngIf="isLoaderShow" class="loader text-center">
+  <span class="sr-only"><img alt="" src="./assets/images/front/loader-logo.png"></span>
+  <div class="spinner-borders" role="status">
+  </div>
+</div>
+<div *ngIf="isTransactionLoaderShow" class="loader with-text text-center">
+  <div class="spinners-content">
+    <div class="spinners">
+      <span class="sr-only"><img alt="" src="./assets/images/front/loader-logo.png"></span>
+      <div class="spinner-borders" role="status">
+      </div>
+    </div>
+    <div class="content">
+      <h3>Please wait while transaction in progress</h3>
+      <div class="loader-timline-content mt-2">
+        <div class="timeline">
+          <div class="timeline-item completed" [ngClass]="{'completed':item.stepStatus=='completed','current':item.stepStatus=='inProgress'}" *ngFor="let item of isEthTransaction? transactionLoaderStepsForEth:transactionLoaderStepsForTok; index as i">
+            <div class="timeline-icon">
+              <img src="../assets//images/front/tick.png" alt="">
+            </div>
+            <div class="timeline-content">
+              <h4>{{item.stepName}}</h4>
+              <ul>
+                <li *ngFor="let subItem of item.stepDescription; index as j" [ngClass]="{'sub-completed':subItem.stepStatus=='completed','sub-current':subItem.stepStatus=='inProgress'}"><span class="dots"></span><span class="text"> {{subItem.name}}</span></li>
+
+              </ul>
+            </div>
+            <div class="timeline-line completed-line"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

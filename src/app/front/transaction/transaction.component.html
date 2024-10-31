@@ -1,0 +1,80 @@
+<div class="main-content community-list">
+  <div class="card">
+    <div class="card-body">
+      <div class="title">
+        Transactions
+      </div>
+      <div class="select-search mt-3">
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="search">
+              <select class="form-control" [(ngModel)]="selectedFilter" (change)="filterChange()">
+                <option value="">All</option>
+                <option value="site_commission">Site Commissions</option>
+                <option value="winning">Winning</option>
+                <option value="promo">Promo</option>
+                <option value="withdraw">Withdraw</option>
+                <option value="add">Added By Admin</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tableresponsive table-responsive-xxl community-table border-0 pt-3 mb-4">
+        <table class="table table-striped p-0">
+          <thead>
+          <tr>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Community Name</th>
+            <th>User</th>
+            <th>Note</th>
+            <th>Balance</th>
+            <th>Status</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of transactionList; index as i">
+            <td data-title="Date">{{ item?.created_at |date }}</td>
+            <td data-title="Amount" *ngIf="item?.currency_type!='FCFA'" [ngClass]="{'payment-unsuccessfully':item.type=='DEBIT','payment-successfully':item.type=='CREDIT'}">{{ item.commission_amount}} {{item?.currency_type}}</td>
+            <td data-title="Amount" *ngIf="item?.currency_type=='FCFA'" [ngClass]="{'payment-unsuccessfully':item.type=='DEBIT','payment-successfully':item.type=='CREDIT'}">{{ item.commission_amount | currency:'XAF':'FCFA ' :'1.0-2'}} {{item?.currency_type}}</td>
+            <td data-title="Community Id">{{ item?.community?.community_name }}</td>
+            <td data-title="Users">{{ item?.user?.user_name}}</td>
+            <td data-title="Note">{{ getTransactionNotes(item?.source)}}</td>
+            <td data-title="Balance Amount" *ngIf="item?.currency_type!='FCFA'">{{ item?.balance_amount}} {{item?.currency_type}}</td>
+            <td data-title="Balance Amount" *ngIf="item?.currency_type=='FCFA'">{{ item?.balance_amount | currency:'XAF':'FCFA ' :'1.0-2'}} {{item?.currency_type}}</td>
+            <td data-title="Status">{{ item?.status}}</td>
+          </tr>
+          <tr *ngIf="!transactionList.length" >
+            <td colspan="7"><span class="text-center">No record found</span></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div *ngIf="transactionList.length" class="row table-pagination">
+        <div class="col-sm-4">
+          <ng-select
+            [(ngModel)]="pageData.limit"
+            [clearable]="false"
+            [items]="pageSizeList"
+            [multiple]="false"
+            [searchable]="false"
+            (change)="limitChange()"
+          >
+          </ng-select>
+        </div>
+        <div class="col-sm-8">
+          <ngb-pagination
+            (pageChange)="pageChange($event)"
+            [(page)]="pageData.page"
+            [boundaryLinks]="true"
+            [collectionSize]="pageData.total"
+            [maxSize]="5"
+            [pageSize]="pageData.limit"
+            [rotate]="true"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,176 @@
+<div class="login-register-bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 logo-with-social-icons">
+        <div class="content-wrap">
+          <div class="logo">
+            <img style="cursor: pointer" routerLink="/" src="assets/images/front/livetipr-logo-dark.png" alt="" >
+          </div>
+<!--          <div class="text">-->
+<!--            Login using social media to get quick access-->
+<!--          </div>-->
+<!--          <div class="social-buttons">-->
+<!--            <img (click)="loginWithFacebook()" [src]="active==1?'assets/images/front/Sign_in_with_Facebook.png':'assets/images/front/Sign_up_with_Facebook.png'" alt="" >-->
+<!--            <img (click)="loginWithGoogle()" [src]="active==1?'assets/images/front/Sign_in _with_Google+.png':'assets/images/front/Sign_up_with_Google+.png'" alt="" >-->
+<!--&lt;!&ndash;            <img src="assets/images/front/twitter.png" alt="" >&ndash;&gt;-->
+<!--          </div>-->
+        </div>
+      </div>
+      <div class="col-lg-6 register-login-content">
+
+        <div class="logo">
+          <img style="cursor: pointer" routerLink="/" src="assets/images/front/livetipr-logo-dark.png" alt="">
+        </div>
+<!--        <div class="text">-->
+<!--          Login using social media to get quick access-->
+<!--        </div>-->
+        <div class="content-wrap">
+          <div *ngIf="errorMessage" class="invalid-feedback" style="display: block">
+            <div>{{errorMessage}}</div>
+          </div>
+          <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+            <li [ngbNavItem]="1">
+              <a ngbNavLink>sign in</a>
+              <ng-template ngbNavContent>
+                <form [formGroup]="loginForm">
+                  <div class="form-group">
+                    <input type="text"
+                           class="form-control"
+                           placeholder="Email address"
+                            formControlName="email_id"
+                            [ngClass]="{'is-invalid': loginForm.controls['email_id'].invalid && (loginForm.controls['email_id'].touched ||loginForm.controls['email_id'].dirty || loginSubmitted)}"
+                    >
+                    <div class="invalid-feedback">
+                      <div *ngIf="loginForm.controls['email_id'].errors?.['required']">Email is required</div>
+                      <div *ngIf="loginForm.controls['email_id'].errors?.['pattern']">Please enter a valid email address</div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="hide-show-input">
+                      <input [type]="!show?'password':'text'"
+                             class="form-control"
+                             placeholder="Password"
+                              formControlName="password"
+                              [ngClass]="{'is-invalid': loginForm.controls['password'].invalid && (loginForm.controls['password'].touched ||loginForm.controls['password'].dirty || loginSubmitted)}"
+                      >
+                      <a (click)="show=!show">
+                        <span><i class='bx' [ngClass]="show?'bx-show':'bx-hide'"></i></span>
+                      </a>
+                      <div class="invalid-feedback">
+                        <div *ngIf="loginForm.controls['password'].errors?.['required']">Password is required</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group d-flex align-items-center justify-content-between">
+                    <div class="form-check">
+                      <label class="container-checkbox">Remember me
+                        <input id="remember-me" type="checkbox"/>
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+<!--                    <div class="forget-link">-->
+<!--                      <a (click)="openForgotPasswordModal()">Forgot Password?</a>-->
+<!--                    </div>-->
+                  </div>
+                  <div class="form-group buttons text-center">
+                      <input type="button" class="btn btnsuccess btn-login" value="Sign In" (click)="login()">
+                  </div>
+<!--                  <a class="text-end pt-2 d-block get-help" routerLink="/support-ticket">Need Help?</a>-->
+                </form>
+              </ng-template>
+            </li>
+<!--            <li [ngbNavItem]="2">-->
+<!--              <a ngbNavLink>Sign Up</a>-->
+<!--              <ng-template ngbNavContent>-->
+<!--                <form [formGroup]="registerForm">-->
+<!--                  <div class="form-group">-->
+<!--                    <input type="text"-->
+<!--                           class="form-control"-->
+<!--                           placeholder="Name"-->
+<!--                           formControlName="userName"-->
+<!--                            autocomplete="signup-name"-->
+<!--                           [ngClass]="{'is-invalid': registerForm.controls['userName'].invalid && (registerForm.controls['userName'].touched ||registerForm.controls['userName'].dirty || signupSubmitted)}"-->
+<!--                    >-->
+<!--                    <div class="invalid-feedback">-->
+<!--                      <div *ngIf="registerForm.controls['userName'].errors?.['required']">Name is required</div>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                  <div class="form-group">-->
+<!--                    <input type="text"-->
+<!--                           class="form-control"-->
+<!--                           placeholder="Email address"-->
+<!--                           formControlName="emailId"-->
+<!--                            autocomplete="signup-email"-->
+<!--                            [ngClass]="{'is-invalid': registerForm.controls['emailId'].invalid && (registerForm.controls['emailId'].touched ||registerForm.controls['emailId'].dirty || signupSubmitted)}"-->
+<!--                    >-->
+<!--                    <div class="invalid-feedback">-->
+<!--                      <div *ngIf="registerForm.controls['emailId'].errors?.['required']">Email is required</div>-->
+<!--                      <div *ngIf="registerForm.controls['emailId'].errors?.['pattern']">Please enter a valid email address</div>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--&lt;!&ndash;                  <div class="form-group">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <input type="text"&ndash;&gt;-->
+<!--&lt;!&ndash;                           class="form-control"&ndash;&gt;-->
+<!--&lt;!&ndash;                           placeholder="Phone Number"&ndash;&gt;-->
+<!--&lt;!&ndash;                           formControlName="phoneNumber"&ndash;&gt;-->
+<!--&lt;!&ndash;                           autocomplete="signup-phone"&ndash;&gt;-->
+<!--&lt;!&ndash;                            [ngClass]="{'is-invalid': registerForm.controls['phoneNumber'].invalid && (registerForm.controls['phoneNumber'].touched ||registerForm.controls['phoneNumber'].dirty || signupSubmitted)}"&ndash;&gt;-->
+<!--&lt;!&ndash;                    >&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div class="invalid-feedback">&ndash;&gt;-->
+<!--&lt;!&ndash;                      <div *ngIf="registerForm.controls['phoneNumber'].errors?.['required']">Phone Number is required</div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                  </div>&ndash;&gt;-->
+<!--                  <div class="form-group">-->
+<!--                    <div class="hide-show-input">-->
+<!--                      <input [type]="!show?'password':'text'"-->
+<!--                             class="form-control"-->
+<!--                             placeholder="Password"-->
+<!--                             formControlName="password"-->
+<!--                             autocomplete="signup-password"-->
+<!--                              [ngClass]="{'is-invalid': registerForm.controls['password'].invalid && (registerForm.controls['password'].touched ||registerForm.controls['password'].dirty || signupSubmitted)}"-->
+<!--                      >-->
+<!--                      <a (click)="show=!show">-->
+<!--                        <span><i class='bx' [ngClass]="show?'bx-show':'bx-hide'"></i></span>-->
+<!--                      </a>-->
+<!--                      <div class="invalid-feedback">-->
+<!--                        <div *ngIf="registerForm.controls['password'].errors?.['required']">Password is required</div>-->
+<!--                        <div *ngIf="registerForm.controls['password'].errors?.['pattern']">Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one digit, and one special character</div>-->
+
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  </div><div class="form-group">-->
+<!--                    <div class="hide-show-input">-->
+<!--                      <input [type]="!show1?'password':'text'"-->
+<!--                             class="form-control"-->
+<!--                             placeholder="Confirm Password"-->
+<!--                             formControlName="confirmPassword"-->
+<!--                              [ngClass]="{'is-invalid': registerForm.controls['confirmPassword'].invalid && (registerForm.controls['confirmPassword'].touched ||registerForm.controls['confirmPassword'].dirty || signupSubmitted)}"-->
+<!--                      >-->
+<!--                      <a (click)="show1=!show1">-->
+<!--                        <span><i class='bx' [ngClass]="show1?'bx-show':'bx-hide'"></i></span>-->
+<!--                      </a>-->
+<!--                      <div class="invalid-feedback">-->
+<!--                        <div *ngIf="registerForm.controls['confirmPassword'].errors?.['required']">Confirm Password is required</div>-->
+<!--                        <div *ngIf="registerForm.controls['confirmPassword'].errors?.['mismatchedPasswords']">Passwords do not match</div>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                  <div class="form-group buttons text-center">-->
+<!--                      <input type="button" class="btn btnsuccess btn-login" value="Sign Up" (click)="register()">-->
+<!--                  </div>-->
+<!--                  <a class="text-end pt-2 d-block get-help" routerLink="/support-ticket">Need Help?</a>-->
+<!--                </form>-->
+<!--              </ng-template>-->
+<!--            </li>-->
+          </ul>
+          <div [ngbNavOutlet]="nav" class="tabcontent"></div>
+        </div>
+<!--        <div class="social-buttons">-->
+<!--          <img (click)="loginWithFacebook()" [src]="active==1?'assets/images/front/Sign_in_with_Facebook.png':'assets/images/front/Sign_up_with_Facebook.png'" alt="" >-->
+<!--          <img (click)="loginWithGoogle()" [src]="active==1?'assets/images/front/Sign_in _with_Google+.png':'assets/images/front/Sign_up_with_Google+.png'" alt="" >-->
+<!--&lt;!&ndash;          <img src="assets/images/front/twitter.png" alt="" >&ndash;&gt;-->
+<!--        </div>-->
+      </div>
+    </div>
+  </div>
+</div>

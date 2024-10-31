@@ -1,0 +1,95 @@
+<div class="main-content community-list">
+  <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+  <div class="card">
+    <div class="card-body">
+      <div class="title">
+        Communities
+      </div>
+      <div class="select-search mt-3">
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="search">
+              <img alt="" src="./assets/images/front/search.png">
+              <input placeholder="Search" type="text" class="search-input" (input)="search($event)"/>
+            </div>
+          </div>
+          <div class="col-sm-8">
+            <div class="label-select">
+              <label>Access Type:</label>
+              <ng-select
+                [(ngModel)]="selectedCommunityAccessTypes"
+                [clearable]="false"
+                [items]="accessTypes"
+                [multiple]="false"
+                [searchable]="false"
+                bindLabel="name"
+                bindValue="id"
+                (change)="accessTypesChange()"
+              >
+              </ng-select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tableresponsive table-responsive-xxl community-table border-0 pt-3 mb-4">
+        <table class="table table-striped p-0">
+          <thead>
+          <tr>
+            <th>Community Name</th>
+            <th>Tournament Name</th>
+            <th>Community Manager</th>
+            <th>Creation Date</th>
+            <th>Users</th>
+            <th>Access Type</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let community of communities; index as i">
+            <td data-title="Community Name">{{ community?.community_name }}</td>
+            <td data-title="Tournament Name">{{ community.competition?.name }}</td>
+            <td data-title="Community Manager">{{ community?.player_name }}</td>
+            <td data-title="Creation Date">{{ community?.creation_date |date}}</td>
+            <td data-title="Users">{{ community?.user_count}}</td>
+<!--            <td data-title="Access Type">{{ community?.access_type }}</td>-->
+            <td data-title="Access Type" class="access-type">
+              <label class="switch">
+              <input type="checkbox"  [checked]="community?.access_type=='PUB'" (change)="typeChangeFn($event,community.community_id)">
+              <div class="slider round">
+                <!--ADDED HTML -->
+                <span class="on">PUB</span>
+                <span class="off">PRI</span>
+                <!--END-->
+              </div>
+            </label>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row table-pagination">
+        <div class="col-sm-4">
+          <ng-select
+            [(ngModel)]="pageData.limit"
+            [clearable]="false"
+            [items]="pageSizeList"
+            [multiple]="false"
+            [searchable]="false"
+            (change)="limitChange()"
+          >
+          </ng-select>
+        </div>
+        <div class="col-sm-8">
+          <ngb-pagination
+            (pageChange)="pageChange($event)"
+            [(page)]="pageData.page"
+            [boundaryLinks]="true"
+            [collectionSize]="pageData.total"
+            [maxSize]="5"
+            [pageSize]="pageData.limit"
+            [rotate]="true"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

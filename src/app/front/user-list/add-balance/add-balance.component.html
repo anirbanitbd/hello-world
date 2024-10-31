@@ -1,0 +1,38 @@
+<div class="mobile-money-content">
+  <div class="modal-header">
+    <h4 class="modal-title">Send Money</h4>
+    <button (click)="activeModal.dismiss()" aria-label="Close" class="btn-close" type="button">
+      <i class="bx bx-x"></i>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="sendBalanceForm">
+      <div class="row">
+        <div class="col-md-12">
+          <div>
+            <label>Amount in FCFA</label>
+            <input formControlName="amount" class="form-control" placeholder="0" type="number">
+             <div  *ngIf="sendBalanceForm.get('amount')?.invalid && (sendBalanceForm.get('amount')?.touched || sendBalanceForm.get('amount')?.dirty)" class="text-danger">
+              <div *ngIf="sendBalanceForm.get('amount')?.errors?.['required']">Amount is required</div>
+              <div *ngIf="sendBalanceForm.get('amount')?.errors?.['min']">Amount must be greater than 0</div>
+             </div>
+          </div>
+        </div>
+        <div class="col-md-12 mt-3">
+          <div>
+            <label>Select balance type</label>
+            <select formControlName="balance_type" class="form-control">
+              <option value="BONUS">As bonus</option>
+              <option value="WINNING">As winning</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="row">
+      <div class="col-md-12 d-flex justify-content-center">
+        <button  class="btn btnsuccess send w-50 mt-4" [disabled]="sendBalanceForm.invalid"  type="button" (click)="addBalance()">Send</button>
+      </div>
+    </div>
+  </div>
+</div>

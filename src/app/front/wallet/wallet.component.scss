@@ -1,0 +1,28 @@
+/* Webkit Browsers */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield !important;
+}
+
+.mtn-org-img{
+  font-size: 0.8rem !important;
+  line-height: 18px !important;
+  color: #fff;
+
+  span{
+    width: 50%;
+    img{
+      width: 20px;
+      height: 20px
+    }
+  }
+}
+.wallet-33{
+  width: 33.3333333333%!important;
+}

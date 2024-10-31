@@ -1,0 +1,29 @@
+
+.site-maintance{
+  background: #F8F8F8;
+  height: 100vh;
+  .container{
+    height: 100%;
+    .row{
+      height: 100%;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  .imgs{
+    img{
+      max-width: 100%;
+    }
+  }
+  h3{
+    font-family: 'poppins-semibold';
+    font-size: 2rem;
+    line-height: 40px;
+    color: #0D002EF9;
+    margin-bottom: 0;
+    @media(max-width: 767px){
+      font-size: 1rem;
+      line-height: 24px;
+    }
+  }
+}

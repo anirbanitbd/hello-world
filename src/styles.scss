@@ -1,0 +1,147 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+}
+
+.wrapper {
+  margin-bottom: 20px;
+}
+
+/*****************************************************
+	Custom styling example bellow.
+*****************************************************/
+
+.iti {
+  display: block !important;
+  margin-bottom: 20px;
+}
+
+.iti .dropdown-menu.country-dropdown {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-color: #c7cace;
+  margin-top: -1px;
+
+      @media(max-width: 991px){
+        width: 100% !important;
+      }
+
+}
+
+.iti .iti__country-list {
+  box-shadow: none;
+  font-size: 14px;
+  margin-left: 0;
+  //width: 244px;
+  width: 350px;
+  max-height: 170px;
+  //@media(max-width: 576px){
+  //  width: 100%;
+  //}
+  &::-webkit-scrollbar {
+    width: 5px;
+    margin: 0px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #D9D9D9;
+    border-radius: 5px;
+
+  }
+}
+
+.iti__flag-container.open + input {
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.iti .search-container input {
+  font-size: 14px;
+  border-color: #c7cace;
+  border-radius: 0;
+  padding: 5px 10px;
+}
+
+.iti .search-container input:focus {
+  outline: none;
+}
+
+@media screen and (max-width: 479px) {
+  .iti .iti__country-list {
+    width: 88.3vw;
+  }
+}
+
+ngx-intl-tel-input input {
+  height: 44px;
+  margin-bottom: 20px;
+  padding: 10px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #c7cace;
+  border-radius: 4px;
+  font-size: 18px;
+}
+
+ngx-intl-tel-input.ng-invalid.ng-touched input {
+  border: 1px solid #c0392b !important;
+}
+
+ngx-intl-tel-input input:hover {
+  box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.24);
+}
+
+ngx-intl-tel-input input:focus {
+  outline: none !important;
+  border-color: #3498db;
+  box-shadow: 0 0 0 0 #000;
+}
+
+ngx-intl-tel-input input::-webkit-input-placeholder {
+  color: #bac2c7;
+}
+
+ngx-intl-tel-input input:-ms-input-placeholder {
+  color: #bac2c7;
+}
+
+ngx-intl-tel-input input::-ms-input-placeholder {
+  color: #bac2c7;
+}
+
+ngx-intl-tel-input input::placeholder {
+  color: #bac2c7;
+}
+
+ngx-intl-tel-input input[disabled] {
+  background-color: #e5eaf1;
+}
+.iti--allow-dropdown input,
+.iti--allow-dropdown input[type=text],
+.iti--allow-dropdown input[type=tel], .iti--separate-dial-code input,
+.iti--separate-dial-code input[type=text],
+.iti--separate-dial-code input[type=tel] {
+  padding-right: 6px!important;
+  padding-left: 52px!important;
+  margin-left: 0!important;
+}
+
+.iti__selected-flag{
+  @media(max-width: 991px){
+    width: max-content!important;
+  }
+}
+.iti--allow-dropdown .iti__flag-container{
+  @media(max-width: 991px){
+    right: 0!important;
+  }
+}
+
+.iti .iti__country-list{
+  @media(max-width: 991px){
+    width: 100%!important;
+  }
+}
+.iti.separate-dial-code[_ngcontent-ng-c2982863745] input[_ngcontent-ng-c2982863745], .iti.separate-dial-code.iti--allow-dropdown.iti-sdc-2[_ngcontent-ng-c2982863745] input[_ngcontent-ng-c2982863745], .iti.separate-dial-code.iti--allow-dropdown.iti-sdc-3[_ngcontent-ng-c2982863745] input[_ngcontent-ng-c2982863745], .iti.separate-dial-code.iti--allow-dropdown.iti-sdc-4[_ngcontent-ng-c2982863745] input[_ngcontent-ng-c2982863745] {
+  padding-left: 98px !important;
+}

@@ -1,0 +1,36 @@
+<div class="mobile-money-content">
+  <div class="modal-header">
+    <h4 class="modal-title">Mobile money</h4>
+    <button (click)="activeModal.dismiss()" aria-label="Close" class="btn-close" type="button">
+      <i class="bx bx-x"></i>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="paymentInitForm">
+      <div class="row">
+        <div class="col-md-12">
+          <div>
+            <label>Mobile money number</label>
+            <input formControlName="number" class="form-control" placeholder="Enter mobile money number" type="text">
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="row">
+      <div class="col-md-12 d-flex justify-content-center">
+        <button (click)="paymentInit()" [disabled]="paymentInitForm.invalid" class="btn btnsuccess send w-50 mt-4" type="button">Submit</button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="isLoader" class="loader text-center">
+    <div class="img-spinner">
+      <span class="sr-only"><img alt="" src="./assets/images/front/loader-logo.png"></span>
+      <div class="spinners">
+        <div class="spinner-borders" role="status"></div>
+      </div>
+    </div>
+    <div *ngIf="isLoaderText" class="content">
+      Please wait while transaction in progress
+    </div>
+  </div>
+</div>

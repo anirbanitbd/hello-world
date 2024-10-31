@@ -1,0 +1,8 @@
+<div class="breadcrumb-wrapper d-flex" style="--bs-breadcrumb-divider: '>';">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item" *ngFor="let link of breadcrumb?.links">
+      <a *ngIf="link.isLink" routerLink="{{ link.link }}">{{ link.name }}</a>
+      <span *ngIf="!link.isLink">{{ link.name }}</span>
+    </li>
+  </ol>
+</div>
