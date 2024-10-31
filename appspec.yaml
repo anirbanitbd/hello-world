@@ -1,5 +1,0 @@
-version: 0.0
-os: linux
-files:
-  - source: /  # Path in the application bundle
-    destination: /home/ubuntu/app  # Path on the EC2 instance
