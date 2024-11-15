@@ -1,4 +1,5 @@
 #!/bin/bash
-sudo pm2 ls
+cd /var/www/html5
+npm install
 
 
