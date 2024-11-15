@@ -1,3 +1,4 @@
 #!/bin/bash
 pm2 ls
-pm2 start npm --name my-npm-app -- start
+cd /var/www/html5
+pm2 start npm --name my-npm-app2 -- start
